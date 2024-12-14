@@ -35,6 +35,10 @@ int main(void)
 	char* user_in;
 	fgets(input,sizeof(input),stdin);
 	user_in = input;
+	if(user_in==":(exit"||user_in==":(exit\n"||user_in==":(exit\r")
+	{
+		goto h_final;
+	}
 	strTrim(user_in);
 	
 	
@@ -67,6 +71,7 @@ int main(void)
 	}
 	}
 	
+h_final:
 	reColor();
 	free(stulib);
 	system("pause"); 
