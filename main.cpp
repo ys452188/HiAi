@@ -1,7 +1,8 @@
-#pragma waring
+#pragma warning
 #define USIZE 40960  //用户输入占用内存 
 #include <stdio.h>
 #include <iostream>
+#include <string>
 #include "include/view.hpp"
 #include "include/words.hpp"
 #include "include/studylib.hpp"
@@ -15,8 +16,14 @@ int main(void)
 	printf("\033[38;2;255;255;255m");
 	showIcon();
 	//获取学习库信息 
-	char* stulib=(char*)malloc(sizeof(char)*16384);
-	stulib=getLibInfo();
+	// 将动态分配初始化为 NULL 避免重复分配
+    char* stulib = (char*)malloc(sizeof(char) * 16384);
+    if (stulib == NULL) {
+        perror("Memory allocation failed!");
+        return -1;
+    }
+    stulib = getLibInfo();
+
 	
 	while(1)
 	{
