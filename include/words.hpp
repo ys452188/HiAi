@@ -1,6 +1,7 @@
 #include <string.h>
 #include <cstdio>
 #include <stdlib.h>
+#include <cwchar>
 
 // 去除空格
 void strTrim(char* str) 
@@ -31,7 +32,7 @@ void clearQingWen(char* str)
 void clearWenHao(const char* input, char* output) {
     int j = 0;
     for (int i = 0; input[i] != '\0'; i++) {
-        if (input[i] != '？' && input[i] != '?') {
+        if (input[i] != L'？' && input[i] != '?') {
             output[j++] = input[i];
         }
     }
