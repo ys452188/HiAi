@@ -2,7 +2,7 @@
 #include <cstdio>
 #include <stdlib.h>
 
-// È¥³ı¿Õ¸ñ
+// å»é™¤ç©ºæ ¼
 void strTrim(char* str) 
 {
     int len = strlen(str), j = 0;
@@ -16,52 +16,52 @@ void strTrim(char* str)
     str[j] = '\0';
 }
 
-//È¥³ı¡°ÇëÎÊ¡±
+//å»é™¤â€œè¯·é—®â€
 void clearQingWen(char* str)
 {
-	char *pos = strstr(str,"ÇëÎÊ");
+	char *pos = strstr(str,"è¯·é—®");
 	if(pos!=NULL)
 	{
-		// ½« "ÇëÎÊ" ºóÃæµÄÄÚÈİÏòÇ°ÒÆ¶¯¸²¸Çµô "ÇëÎÊ"
-        memmove(pos, pos + strlen("ÇëÎÊ"), strlen(pos + strlen("ÇëÎÊ")) + 1);
+		// å°† "è¯·é—®" åé¢çš„å†…å®¹å‘å‰ç§»åŠ¨è¦†ç›–æ‰ "è¯·é—®"
+        memmove(pos, pos + strlen("è¯·é—®"), strlen(pos + strlen("è¯·é—®")) + 1);
 	}
 } 
 
-//È¥³ıÎÊºÅ 
+//å»é™¤é—®å· 
 void clearWenHao(const char* input, char* output) {
     int j = 0;
     for (int i = 0; input[i] != '\0'; i++) {
-        if (input[i] != '£¿' && input[i] != '?') {
+        if (input[i] != 'ï¼Ÿ' && input[i] != '?') {
             output[j++] = input[i];
         }
     }
     output[j] = '\0';
 }
 
-// ÌáÈ¡ÈËÎïÃû³Æ
+// æå–äººç‰©åç§°
 int getPersonName(const char* str1, char* result) {
-    char str[4096];  // ·ÖÅä×ã¹»µÄ»º³åÇø
+    char str[4096];  // åˆ†é…è¶³å¤Ÿçš„ç¼“å†²åŒº
     clearWenHao(str1, str);
     clearQingWen(str);
-    const char* pos = strstr(str, "ÊÇË­");
+    const char* pos = strstr(str, "æ˜¯è°");
     if (pos) {
         strncpy(result, str, pos - str);
         result[pos - str] = '\0';
         return 1;
     }
 
-    pos = strstr(str, "Ë­ÊÇ");
+    pos = strstr(str, "è°æ˜¯");
     if (pos) {
         strcpy(result, pos + 2);
         return 1;
     }
 
-    pos = strstr(str, "ÊÇÊ²Ã´");
+    pos = strstr(str, "æ˜¯ä»€ä¹ˆ");
     if (pos) {
         strncpy(result, str, pos - str);
         result[pos - str] = '\0';
         return 1;
     }
 
-    return -1;  // ²»ÊÇÎÊÈËÎï
+    return -1;  // ä¸æ˜¯é—®äººç‰©
 }

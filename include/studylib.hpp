@@ -6,54 +6,54 @@ char* getLibInfo(void)
 {
     FILE* fp = fopen("lib/study.txt", "r");
     if (fp == NULL) {
-        perror("\033[38;2;255;0;0m[ERROR]ÎŞ·¨´ò¿ªÑ§Ï°¿âÎÄ¼ş!\033[0m");
+        perror("\033[38;2;255;0;0m[ERROR]æ— æ³•æ‰“å¼€å­¦ä¹ åº“æ–‡ä»¶!\033[0m");
         return NULL;
     }
 
-    fseek(fp, 0, SEEK_END);           // ½«ÎÄ¼şÖ¸ÕëÒÆ¶¯µ½Ä©Î²
-    size_t fileSize = ftell(fp);      // »ñÈ¡ÎÄ¼ş´óĞ¡
-    rewind(fp);                       // ½«ÎÄ¼şÖ¸ÕëÖØĞÂÒÆµ½¿ªÍ·
+    fseek(fp, 0, SEEK_END);           // å°†æ–‡ä»¶æŒ‡é’ˆç§»åŠ¨åˆ°æœ«å°¾
+    size_t fileSize = ftell(fp);      // è·å–æ–‡ä»¶å¤§å°
+    rewind(fp);                       // å°†æ–‡ä»¶æŒ‡é’ˆé‡æ–°ç§»åˆ°å¼€å¤´
 
-    char* info = (char*)malloc(fileSize + 1); // ¶¯Ì¬·ÖÅäÄÚ´æ
+    char* info = (char*)malloc(fileSize + 1); // åŠ¨æ€åˆ†é…å†…å­˜
     if (info == NULL) {
-        perror("[ERROR] ÄÚ´æ·ÖÅäÊ§°Ü£¡");
+        perror("[ERROR] å†…å­˜åˆ†é…å¤±è´¥ï¼");
         fclose(fp);
         return NULL;
     }
 
     fread(info, sizeof(char), fileSize, fp);
-    info[fileSize] = '\0'; // È·±£×Ö·û´®ÒÔ '\0' ½áÎ²
+    info[fileSize] = '\0'; // ç¡®ä¿å­—ç¬¦ä¸²ä»¥ '\0' ç»“å°¾
 
     fclose(fp);
-    return info;  // ·µ»Ø¶¯Ì¬·ÖÅäµÄÄÚ´æ
+    return info;  // è¿”å›åŠ¨æ€åˆ†é…çš„å†…å­˜
 }
 
-//ÔÚÑ§Ï°¿â²éÕÒĞÅÏ¢,ÎŞÔò·µ»Ø-1 
+//åœ¨å­¦ä¹ åº“æŸ¥æ‰¾ä¿¡æ¯,æ— åˆ™è¿”å›-1 
 int searchForName(const char* lib_info, const char* name, char* result) {
-    // ²éÕÒ name ÔÚ lib_info ÖĞµÄÎ»ÖÃ
+    // æŸ¥æ‰¾ name åœ¨ lib_info ä¸­çš„ä½ç½®
     const char* pos = strstr(lib_info, name);
     if (pos == NULL) {
-        return -1;  // Î´ÕÒµ½ name
+        return -1;  // æœªæ‰¾åˆ° name
     }
 
-    // ²éÕÒ "ÊÇ" µÄÎ»ÖÃ£¬±ØĞë³öÏÖÔÚ name ºóÃæ
-    const char* shi_pos = strstr(pos, "ÊÇ");
+    // æŸ¥æ‰¾ "æ˜¯" çš„ä½ç½®ï¼Œå¿…é¡»å‡ºç°åœ¨ name åé¢
+    const char* shi_pos = strstr(pos, "æ˜¯");
     if (shi_pos == NULL) {
-        return -1;  // Î´ÕÒµ½ "ÊÇ"£¬ÎŞÓĞĞ§ĞÅÏ¢
+        return -1;  // æœªæ‰¾åˆ° "æ˜¯"ï¼Œæ— æœ‰æ•ˆä¿¡æ¯
     }
 
-    // ÌáÈ¡´Ó "ÊÇ" ¿ªÊ¼µÄĞÅÏ¢
+    // æå–ä» "æ˜¯" å¼€å§‹çš„ä¿¡æ¯
     const char* info_start = shi_pos;
-    const char* info_end = strstr(info_start, ">)]}"); // ²éÕÒ½áÊø±êÖ¾
+    const char* info_end = strstr(info_start, ">)]}"); // æŸ¥æ‰¾ç»“æŸæ ‡å¿—
     if (info_end == NULL) {
-        return -1;  // ÎŞºÏ·¨½áÊø±êÖ¾
+        return -1;  // æ— åˆæ³•ç»“æŸæ ‡å¿—
     }
 
-    // ¼ÆËã¾ßÌåĞÅÏ¢µÄ³¤¶È²¢¸´ÖÆµ½ result ÖĞ
-    size_t info_length = info_end - info_start; // ¼ÆËã³¤¶È
+    // è®¡ç®—å…·ä½“ä¿¡æ¯çš„é•¿åº¦å¹¶å¤åˆ¶åˆ° result ä¸­
+    size_t info_length = info_end - info_start; // è®¡ç®—é•¿åº¦
     strncpy(result, info_start, info_length);
-    result[info_length] = '\0'; // Ìí¼Ó×Ö·û´®½áÊø·û
+    result[info_length] = '\0'; // æ·»åŠ å­—ç¬¦ä¸²ç»“æŸç¬¦
 
-    return 1;  // ²éÕÒ³É¹¦
+    return 1;  // æŸ¥æ‰¾æˆåŠŸ
 }
 

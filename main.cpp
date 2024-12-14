@@ -1,5 +1,5 @@
 #pragma warning
-#define USIZE 40960  //ÓÃ»§ÊäÈëÕ¼ÓÃÄÚ´æ 
+#define USIZE 40960  //ç”¨æˆ·è¾“å…¥å ç”¨å†…å­˜ 
 #include <stdio.h>
 #include <iostream>
 #include <string>
@@ -15,8 +15,8 @@ int main(void)
 	printf("HiAi byHuang-Xianghan\n\n");
 	printf("\033[38;2;255;255;255m");
 	showIcon();
-	//»ñÈ¡Ñ§Ï°¿âĞÅÏ¢ 
-	// ½«¶¯Ì¬·ÖÅä³õÊ¼»¯Îª NULL ±ÜÃâÖØ¸´·ÖÅä
+	//è·å–å­¦ä¹ åº“ä¿¡æ¯ 
+	// å°†åŠ¨æ€åˆ†é…åˆå§‹åŒ–ä¸º NULL é¿å…é‡å¤åˆ†é…
     char* stulib = (char*)malloc(sizeof(char) * 16384);
     if (stulib == NULL) {
         perror("Memory allocation failed!");
@@ -27,7 +27,7 @@ int main(void)
 	
 	while(1)
 	{
-	//»ñÈ¡ÓÃ»§ÊäÈë
+	//è·å–ç”¨æˆ·è¾“å…¥
 	setFontColor(0,255,0);
 	printf("YOU: ");
 	
@@ -56,13 +56,13 @@ int main(void)
 			setFontColor(0,160,255);
 			cout<<"Hi:"<<name<<info1<<"\n"<<endl;
 		}else{
-			cout<<"\033[38;2;0;160;255mHi:ÎÒ²»ÖªµÀ°¡¡£\n"<<endl;
+			cout<<"\033[38;2;0;160;255mHi:æˆ‘ä¸çŸ¥é“å•Šã€‚\n"<<endl;
 		}
 		free(info1);
 	}
 	else
 	{
-		cout<<"\033[38;2;0;160;255mHi:ÎÒ²»ÖªµÀ°¡¡£\n"<<endl;
+		cout<<"\033[38;2;0;160;255mHi:æˆ‘ä¸çŸ¥é“å•Šã€‚\n"<<endl;
 		free(name);
 	}
 	}
